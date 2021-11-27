@@ -5,6 +5,7 @@ import { TreeInput } from './TreeInput';
 import { TreeOutput } from './TreeOutput';
 import "./Body.scss"
 import { useAppStateContext } from './AppState';
+import { TreeText } from './TreeText';
 interface BodyProps {
     appState: IAppState
 }
@@ -13,12 +14,24 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
     return (
         <main className="App-body">
             {props.appState!.bodyMessage}
-            <TreeInput onChange={(newVal) => {
-                props.appState.setState({
-                    ...props.appState,
-                    treeNode: newVal
-                })
-            }} />
+            <TreeInput 
+                onChange={(newVal) => {
+                    props.appState.setState({
+                        ...props.appState,
+                        treeNode: newVal
+                    })
+                }}
+            />
+            <TreeText 
+                treeNode={props.appState.treeNode} 
+                onChange={(newVal) => {
+                    props.appState.setState({
+                        ...props.appState,
+                        treeNode: newVal
+                    })
+                }}
+            />
+
             <div className="OutputContainer">
                 <TreeOutput treeNode={props.appState.treeNode} />
             </div>

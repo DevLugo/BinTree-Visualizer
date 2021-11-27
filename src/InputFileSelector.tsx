@@ -1,15 +1,16 @@
+
 import * as React from "react";
 import { BinTreeNode } from "./TreeNode";
 
-export interface TreeInputProps {
+export interface InputFileSelectorProps {
     onChange: (newTreeNode: BinTreeNode) => void
 }
-interface TreeInputState {
+interface InputFileSelectorState {
     treeText: string
 }
 
-export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
-    constructor(props: TreeInputProps) {
+export class InputFileSelector extends React.Component<InputFileSelectorProps, InputFileSelectorState>{
+    constructor(props: InputFileSelectorProps) {
         super(props);
         this.state = {
             treeText: ""
@@ -21,24 +22,8 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
      * @param arrayFormat [id, leftChild, rightChild] for example [1, [2], [3, null, [5]]]
      * @returns TreeNode format
      * */
-    parseArrayToTree(arrayFormat: any[]): BinTreeNode {
-        const [id, left, right] = arrayFormat;
-
-        let leftChild = null;
-        let rightChild = null;
-
-        if (Array.isArray(left)) {
-            leftChild = this.parseArrayToTree(left)
-        }
-        if (Array.isArray(right)) {
-            rightChild = this.parseArrayToTree(right)
-        }
-
-        return new BinTreeNode(
-            id,
-            leftChild,
-            rightChild
-        );
+    validateTree(arrayFormat: any): Boolean {
+        
     }
 
     convert = () => {
@@ -48,9 +33,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
 
         // After you implement parseArrayToTree above, comment the below code
         /*let treeNodeFormat: BinTreeNode = JSON.parse(this.state.treeText);
-        console.log(treeNodeFormat)
-        this.props.onChange(treeNodeFormat);
-        console.log("ELEFANTE")*/
+        this.props.onChange(treeNodeFormat);*/
     }
 
     render() {

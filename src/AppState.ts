@@ -11,6 +11,9 @@ export class AppState implements IAppState {
     @observable bodyMessage = "Process the input text to a BinTreeNode";
 
     @observable treeNode = new BinTreeNode("root", null, null);
+    @observable treeText = "[]";
+    @observable parsingError = false;
+    @observable parsingErrorMessage = "";
 
     constructor() {
         makeObservable(this)
@@ -18,8 +21,11 @@ export class AppState implements IAppState {
 
     @action setState(newState: IAppState) {
         this.title = newState.title;
+        this.treeText = newState.treeText;
+        this.treeNode = newState.treeNode;
         this.bodyMessage = newState.bodyMessage;
-        this.treeNode = newState.treeNode
+        this.parsingError = newState.parsingError;
+        this.parsingErrorMessage = newState.parsingErrorMessage;
     }
 }
 
