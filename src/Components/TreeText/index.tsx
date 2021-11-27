@@ -1,7 +1,8 @@
 import * as React from "react";
-import { BinTreeNode } from "./TreeNode";
-
-import "./TreeOutput.scss"
+import { BinTreeNode } from "../../Types/BinTreeNode";
+import { Input } from 'antd';
+import "./../TreeOutput/TreeOutput.scss"
+const { TextArea } = Input;
 
 export interface TreeTextProps {
     treeNode: BinTreeNode | null
@@ -11,7 +12,7 @@ export interface TreeTextProps {
 export const TreeText: React.FunctionComponent<TreeTextProps> = (props) => {
     return (
         <div className="">
-            <textarea rows={20} cols={120} value={JSON.stringify(props.treeNode,null, 2)}></textarea>
+            <TextArea rows={20} value={JSON.stringify(props.treeNode,null, 2)}></TextArea>
         </div>
     );
 }

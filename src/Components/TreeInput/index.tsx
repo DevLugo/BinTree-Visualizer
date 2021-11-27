@@ -1,5 +1,9 @@
 import * as React from "react";
-import { BinTreeNode } from "./TreeNode";
+import { BinTreeNode } from "../../Types/BinTreeNode";
+import { Upload, message, Button, Input } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
+const { TextArea } = Input;
 
 export interface TreeInputProps {
     onChange: (newTreeNode: BinTreeNode) => void
@@ -7,12 +11,12 @@ export interface TreeInputProps {
 interface TreeInputState {
     treeText: string
 }
-
-export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
+            
+export default class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
     constructor(props: TreeInputProps) {
         super(props);
         this.state = {
-            treeText: ""
+            treeText: "",
         }
     }
 
@@ -23,7 +27,6 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
      * */
     parseArrayToTree(arrayFormat: any[]): BinTreeNode {
         const [id, left, right] = arrayFormat;
-
         let leftChild = null;
         let rightChild = null;
 
@@ -54,15 +57,26 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
     }
 
     render() {
+        const props = {
+            name: 'file',
+            beforeUpload: (file:any) => {
+                const reader = new FileReader();
+                reader.onload = (e:any) => {
+                    this.setState({treeText:reader.result as string});
+                    this.convert();
+                };
+                reader.readAsText(file);
+
+                // Prevent upload
+                return false;
+            },
+        }
         return (
-            <div>
-                <button onClick={this.convert}>Process</button><br />
-                <textarea rows={5} cols={120} onChange={(ev) => {
-                    this.setState({
-                        treeText: ev.target.value
-                    })
-                }}></textarea>
-            </div>
+            <>
+                <Upload {...props}>
+                    <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
+            </>
         )
     }
 }

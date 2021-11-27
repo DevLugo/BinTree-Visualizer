@@ -1,6 +1,5 @@
 .treeNode{
     // fill me in
-    width: 40%;
     display: inline-block;
     vertical-align: top;
     text-align: center;
@@ -8,13 +7,13 @@
     padding: 1px;  
 }
 .OutputContainer>.treeNode{
-    width: 100% !important;
     padding: auto;
 }
 
 .treeNode > .nodeId{
     font-weight: bold;
     font-size: 10px;
+    color: white;
 }
 
 .nodeId > .treeNode{
@@ -23,7 +22,7 @@
 
 .nodeChildren{
     //fill me in
-    border: 1px solid #e2e597;
+    //border: 1px solid #e2e597;
     padding: 10px 0;
 }
 

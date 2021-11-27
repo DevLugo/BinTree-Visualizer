@@ -2,7 +2,7 @@ import * as React from "react";
 import "./configureMobx";
 import { observable, action, makeObservable } from "mobx";
 import { IAppState } from "./IAppState";
-import { BinTreeNode } from "./TreeNode";
+import { BinTreeNode } from "./Types/BinTreeNode";
 import { createContext } from "react";
 
 export class AppState implements IAppState {
