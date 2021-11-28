@@ -1,50 +1,27 @@
 import * as React from 'react';
-import { IAppState } from "../../IAppState";
-import { observer } from "mobx-react";
-import TreeInput from '../../Components/TreeInput';
+import FileSelector from '../../Components/FileSelector';
 import { TreeOutput } from '../../Components/TreeOutput';
 import "./Body.scss"
-import { useAppStateContext } from '../../AppState';
-import { TreeText } from '../../Components/TreeText';
+import { TreeTextArea } from '../../Components/TreeTextArea';
 import { Col, Row } from 'antd';
-interface BodyProps {
-    appState: IAppState
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTree } from '../../store/TreeSlice';
 
-const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
+const Body: React.FunctionComponent = () => {
+    const {treeNode} = useSelector(selectTree);
     return (
-        <Row gutter={15} style={{marginTop: "10px"}}>
+        <Row gutter={15} style={{marginTop: "10px",}}>
             <Col span={6} >
-                    <TreeInput 
-                        onChange={(newVal) => {
-                            props.appState.setState({
-                                ...props.appState,
-                                treeNode: newVal
-                            })
-                        }}
-                    />
-                    <TreeText 
-                        treeNode={props.appState.treeNode} 
-                        onChange={(newVal) => {
-                            props.appState.setState({
-                                ...props.appState,
-                                treeNode: newVal
-                            })
-                        }}
-                    />
+                    <FileSelector />
+                    <TreeTextArea/>
             </Col>
             
             <Col span={18}>
-                <TreeOutput treeNode={props.appState.treeNode} />
+                <TreeOutput treeNode={treeNode} />
             </Col>
       </Row>
         
-    );
-})
-
-export const Body: React.FunctionComponent<{}> = (props) => {
-    const appState = useAppStateContext();
-    return <BodyRenderer appState={appState} />
+    )
 }
 
 export default Body;
