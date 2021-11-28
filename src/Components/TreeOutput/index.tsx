@@ -15,7 +15,13 @@ export const TreeOutput: React.FunctionComponent<TreeOutputProps> = (props) => {
     const {treeNode, colorToAvoid} = props;
     const {deepNodeParent} = useSelector(selectTree);
     
-    const getRandomColor = (colorToAvoid?: string) => {
+    /**
+     * return a random color form the classColors list. Taking in care the colorToAvoid.
+     * This could be usefull if you want to avoid to has the same color than the parent's node
+     * @param colorToAvoid color to avoid on the return value 
+     * @returns string
+     */
+    const getRandomColor = (colorToAvoid?: string): string => {
         const classColors = ['001f3f', '0074D9', '7FDBFF', '39CCCC','B10DC9', 'F012BE', '85144b', 'FF4136', 'FF851B', 'FFDC00'];
         const classColorsFiltered = classColors.filter(c => c !== colorToAvoid);
         const selectedClass = classColorsFiltered[Math.floor(Math.random() * classColorsFiltered.length)];
@@ -26,9 +32,6 @@ export const TreeOutput: React.FunctionComponent<TreeOutputProps> = (props) => {
     if (!treeNode || !treeNode.id) {
         return (
         <Row className={"ant-alert-content treeNode "}  style={{ 
-            borderRadius: "5px",
-            border: "1px solid #blue",
-            textAlign: "center",
             backgroundColor: "#"+mainColor,
             color: "white"
             }}>

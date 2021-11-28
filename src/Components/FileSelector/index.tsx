@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { BinTreeNode } from "../../Types/BinTreeNode";
-import { Upload, message, Button, Input } from 'antd';
+import { Upload, Button, Input } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useDispatch } from "react-redux";
 import {
@@ -9,11 +9,7 @@ import {
   } from "../../store/TreeSlice";
 
 const { TextArea } = Input;
-
-interface TreeInputState {
-    treeText: string
-}
-            
+        
 export default function FileSelector(){
     const dispatch = useDispatch();
     const [fileText, setFileText] = useState<string>('');
@@ -37,7 +33,6 @@ export default function FileSelector(){
         }
 
         dispatch(setHasParsingError(false))
-        console.log("deepLevel",deepLevel)
         dispatch(setDeepLevel({
             deepLevel:deepLevel,
             parent:parent
@@ -60,8 +55,6 @@ export default function FileSelector(){
 
     useEffect(() => {
         if(!!fileText){
-            console.log(fileText)
-            console.log(typeof fileText)
             let treeArrayFormat: any[] = JSON.parse(fileText);
             const arrayTree = parseArrayToTree(treeArrayFormat,0);
             dispatch(setTreeText(JSON.stringify(arrayTree, null, 2)))
@@ -75,8 +68,6 @@ export default function FileSelector(){
             const reader = new FileReader();
             reader.onload = (e:any) => {
                 setFileText(reader.result as string);
-                //dispatch(setTreeText(reader.result as string));
-                //convert();
             };
             reader.readAsText(file);
 

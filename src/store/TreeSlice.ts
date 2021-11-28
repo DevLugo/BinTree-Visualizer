@@ -30,6 +30,12 @@ const treeSlice = createSlice({
     setHasParsingError: (state, action) => {
         state.hasParsingError = action.payload;
     },
+    /**
+     * This function will be call by a recursive function. Then we need to validate if 
+     * the deepLevel received is higher than the state.deepLevel
+     * @param state 
+     * @param action 
+     */
     setDeepLevel: (state, action: PayloadAction<{deepLevel:number, parent?:string}>) => {
       const { deepLevel, parent } = action.payload;
       if (state.deepLevel < deepLevel){
