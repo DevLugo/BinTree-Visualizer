@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BinTreeNode } from "../../Types/BinTreeNode";
-import { Input } from 'antd';
-import "./../TreeOutput/TreeOutput.scss"
+import { Input, message } from 'antd';
+import "./index.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { selectTree, setHasParsingError, setTreeNode, setTreeText, setDeepLevel } from "../../store/TreeSlice";
 const { TextArea } = Input;
@@ -10,19 +10,29 @@ export const TreeTextArea: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const {hasParsingError,treeText} = useSelector(selectTree);
 
-    const convertObjToClass = (obj:any, deepLevel:number, parent?: string) => {
+    /**
+     * Recursive function to parse/transform an objeto into a BinTreeNode
+     * @param obj objet that wil try to transform into a BinTreeNode.
+     * @param deepLevel deepLevel is necesary to identify what is the deeper level on this full binTreeNode
+     * @param parent node parent id
+     * @returns BinTreeNode
+     */
+    const convertObjToBinTreeNode = (obj:any, deepLevel:number, parent?: string): BinTreeNode  => {
         let leftChild: BinTreeNode;
         let rightChild: BinTreeNode;
+
+        // Validate required attributes
         if (!Object.keys(obj).includes("left"))
             throw new TypeError("Left attribute is required")
         if (!Object.keys(obj).includes("right"))
             throw new TypeError("right attribute is required")
 
+        //If left or right has some value, then try to iterate recursively
         if (obj.left)
-            leftChild = convertObjToClass(obj.left, deepLevel+1, obj.id)!
+            leftChild = convertObjToBinTreeNode(obj.left, deepLevel+1, obj.id)!
         
         if (obj.right)
-            rightChild = convertObjToClass(obj.right,deepLevel+1, obj.id)!
+            rightChild = convertObjToBinTreeNode(obj.right,deepLevel+1, obj.id)!
 
         const tree = new BinTreeNode(
             obj.id, 
@@ -50,17 +60,14 @@ export const TreeTextArea: React.FunctionComponent = () => {
                     }
                     dispatch(setTreeText(newVal.target.value))
                     try {
-                        const parsedTree = convertObjToClass(parsedObj,0);
+                        const parsedTree = convertObjToBinTreeNode(parsedObj,0);
                         if(!parsedTree)
                             dispatch(setHasParsingError(true))
-                    
-                        /*dispatch(setDeepLevel({
-                            deepLevel:0,
-                            parent:parsedTree.id
-                        }))*/
+
                         dispatch(setTreeNode(parsedTree))
                         dispatch(setHasParsingError(false))
                     } catch (error:any) {
+                        message.error(error.message);
                         dispatch(setHasParsingError(true))
                     }
                 }}

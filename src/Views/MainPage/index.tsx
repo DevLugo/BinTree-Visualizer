@@ -10,7 +10,7 @@ import { selectTree } from '../../store/TreeSlice';
 const Body: React.FunctionComponent = () => {
     const {treeNode} = useSelector(selectTree);
     return (
-        <Row gutter={15} style={{marginTop: "10px",}}>
+        <Row gutter={15} style={{margin: "10px",}}>
             <Col span={6} >
                     <FileSelector />
                     <TreeTextArea/>
@@ -20,7 +20,6 @@ const Body: React.FunctionComponent = () => {
                 <TreeOutput treeNode={treeNode} />
             </Col>
       </Row>
-        
     )
 }
 

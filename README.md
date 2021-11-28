@@ -1,44 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 
+## Author
+**Rodolfo Lugo**  [linkedin]
 
-## Available Scripts
+## Preview
+![image info](./preview/Capture1.JPG)
+![image info](./preview/Capture2.JPG)
 
-In the project directory, you can run:
+## Features
+- Changed the class structure to use react hooks (useState, useEffect)
+- Implemented redux store/redux slice to manage the application state. (I dont have previous experience with mobx)
+- Created a recursive function **parseArrayToTree** on the file *"TreeTextArea/index.tsx"*
+-Implemented a DeepLevel variable, to know how deep is the current node. Because we are using recursive function, a easy solution is implement the currentDeepLevel + 1 to track the deepLevel 
+- The deeper node has a dashed border of 5 px in blue color
+- Created a recursive function **convertObjToClass** on the file *"FileSelector/index.tsx"*
+- Improved the css/design using ant design library
+- Implemented error alert message on the parsing process
+- Each tree has a own color randomly selected on each render. Litte code to avoid the select the same color than the father for a better visualization on the file *"TreeOutput/index.tsx"*
 
-### `yarn start`
+## TODO
+- Implement unittest using jest. To ensure the correct behaviour of the **parsearrayToTree** and **convertObjetToClass** 
+- Implement E2E test using https://www.cypress.io/ . to ensure the correct visualization of the treeOuput.
+- Allow the user to edit/add/delete tree nodes on the visual interface. 
+    - Adding an new attribute into the **BinTreeNode** class. This attribute will be "label", so, we'll use the id from the string as a label. An will autogenerate an unique id for each node        
+    - On the  **convertObjetToClass** method I'll incluse a hashTable/hashMap to has an quick access into each node. We will se the unique id as a key, and the full node as value.
+    - Now on the TreeOutput file I can access directly into the each node using the  node id and we can edit/remove/add new nodes directly from the treeOutput component. (All this using redux store to comunicate the component) 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Main Requirements
+These are the core dependencies. With yarn you will install the rest of dependencies
+- [yarn] - Yarn is a package manager that doubles down as project manager.
+- [node.js] - evented I/O for the backend
 
-### `yarn test`
+## Install with yarn
+```sh
+cd microsoft_test
+yarn
+yarn start
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Install with npm
+```sh
+cd microsoft_test
+npm install
+npm run start
+```
+   [node.js]: <http://nodejs.org>
+   [yarn]: <https://yarnpkg.com/>
+   [linkedin]: <https://www.linkedin.com/in/rodolfo-lugo/>
+   
