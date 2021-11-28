@@ -19,7 +19,10 @@
 
 ## TODO
 - Implement unittest using jest. To ensure the correct behaviour of the **parsearrayToTree** and **convertObjetToClass** 
+<<<<<<< HEAD
 - Implement E2E test using https://www.cypress.io/ . to ensure the correct visualization of the treeOuput.
+=======
+>>>>>>> 4c70ecc03521422d636b26cfa3c381ecd9ce5e90
 - Allow the user to edit/add/delete tree nodes on the visual interface. 
     - Adding an new attribute into the **BinTreeNode** class. This attribute will be "label", so, we'll use the id from the string as a label. An will autogenerate an unique id for each node        
     - On the  **convertObjetToClass** method I'll incluse a hashTable/hashMap to has an quick access into each node. We will se the unique id as a key, and the full node as value.
